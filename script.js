@@ -14,7 +14,7 @@ const words = [
     { word: "Meteor", image: "images/meteor.jpg" },
     { word: "Raumschiff", image: "images/spaceship.jpg" },
     { word: "Schwarz", image: "images/black.jpg" },
-    { word: "Weiß", image: "images/white.jpg" },
+    { word: "Weiss", image: "images/white.jpg" },
     { word: "Rot", image: "images/red.jpg" },
     { word: "Blau", image: "images/blue.jpg" },
     { word: "Grün", image: "images/green.jpg" },
@@ -55,8 +55,22 @@ function displayRandomWordAndImages() {
             }
         });
     });
+
+    toggleAllCaps();
+}
+
+function toggleAllCaps() {
+    const allCapsSwitch = document.getElementById("all-caps-switch");
+    const wordElement = document.getElementById("word");
+    if (allCapsSwitch.checked) {
+        wordElement.style.textTransform = "uppercase";
+    } else {
+        wordElement.style.textTransform = "none";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     displayRandomWordAndImages();
+    const allCapsSwitch = document.getElementById("all-caps-switch");
+    allCapsSwitch.addEventListener("change", toggleAllCaps);
 });

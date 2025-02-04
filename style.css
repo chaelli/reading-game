@@ -48,3 +48,12 @@
     50% { transform: scale(0.8); }
     100% { transform: scale(1); }
 }
+
+#all-caps-switch {
+    margin-top: 20px;
+}
+
+label[for="all-caps-switch"] {
+    font-size: 1em;
+    margin-right: 10px;
+}
