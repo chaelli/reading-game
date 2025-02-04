@@ -21,15 +21,28 @@ const words = [
     { word: "Gelb", image: "images/yellow.jpg" }
 ];
 
+const a = 'CrkNg7ascphqbzqJREba99eCeNIfQvHleyWSEDy5wRhuN4XdgtLWWlgF';
+
+async function fetchImagesFromPexels(query) {
+    const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=3`, {
+        headers: {
+            Authorization: a
+        }
+    });
+    const data = await response.json();
+    return data.photos.map(photo => photo.src.medium);
+}
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function displayRandomWordAndImages() {
+async function displayRandomWordAndImages() {
     const randomIndex = getRandomInt(words.length);
     const randomWord = words[randomIndex];
-    const otherImages = words.filter((_, index) => index !== randomIndex).map(item => item.image);
-    const images = [randomWord.image, ...otherImages.slice(0, 2)].sort(() => Math.random() - 0.5);
+    const otherWords = words.filter((_, index) => index !== randomIndex);
+    const otherImages = await Promise.all(otherWords.slice(0, 2).map(word => fetchImagesFromPexels(word.word)));
+    const images = [await fetchImagesFromPexels(randomWord.word), ...otherImages].flat().sort(() => Math.random() - 0.5);
 
     const gameContainer = document.getElementById("game-container");
     gameContainer.innerHTML = `
