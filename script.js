@@ -24,7 +24,7 @@ const words = [
 const a = 'CrkNg7ascphqbzqJREba99eCeNIfQvHleyWSEDy5wRhuN4XdgtLWWlgF';
 
 async function fetchImagesFromPexels(query) {
-    const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=3`, {
+    const response = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=1`, {
         headers: {
             Authorization: a
         }
